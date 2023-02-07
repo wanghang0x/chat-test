@@ -4,6 +4,7 @@ package com.wang.chat.Handler;
 import com.wang.chat.message.LoginRequestMessage;
 import com.wang.chat.message.LoginResponseMessage;
 import com.wang.chat.service.UserServiceFactory;
+import com.wang.chat.session.SessionFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -18,10 +19,10 @@ public class LoginRequestMessageHandler extends SimpleChannelInboundHandler<Logi
         LoginResponseMessage message;
         if (login){
 
-//            SessionFactory.getSession().bind(ctx.channel(),username);//用户名绑定channel
-             message = new LoginResponseMessage(true, "登录成功");
+            SessionFactory.getSession().bind(ctx.channel(),username);//用户名绑定channel
+            message = new LoginResponseMessage(true, "登录成功");
         }else{
-             message = new LoginResponseMessage(false, "用户名或密码不正确");
+            message = new LoginResponseMessage(false, "用户名或密码不正确");
         }
         ctx.writeAndFlush(message);
     }

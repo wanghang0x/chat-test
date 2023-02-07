@@ -1,6 +1,7 @@
 package com.wang.chat;
 
 import com.sun.corba.se.internal.CosNaming.BootstrapServer;
+import com.wang.chat.Handler.ChatRequestMessageHandler;
 import com.wang.chat.Handler.LoginRequestMessageHandler;
 import com.wang.chat.protocol.MessageCodec;
 import com.wang.chat.protocol.MessageCodecSharable;
@@ -26,7 +27,7 @@ public class ChatServer {
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 
         LoginRequestMessageHandler LOGIN_HANDLER = new LoginRequestMessageHandler();
-//        ChatRequestMessageHandler CHAT_HANDLER = new ChatRequestMessageHandler();
+        ChatRequestMessageHandler CHAT_HANDLER = new ChatRequestMessageHandler();
 //        CreateGroupRequestMessageHandler CREATE_GROUP_HANDLER = new CreateGroupRequestMessageHandler();
 //        GroupChatRequestMessageHandler GROUP_CHAT_HANDLER = new GroupChatRequestMessageHandler();
 //        GroupQuitRequestHandler GROUP_QUIT_HANDLER = new GroupQuitRequestHandler();
@@ -43,7 +44,7 @@ public class ChatServer {
                     ch.pipeline().addLast(MESSAGE_CODEC);
 
                     ch.pipeline().addLast(LOGIN_HANDLER);
-//                    ch.pipeline().addLast(CHAT_HANDLER);
+                    ch.pipeline().addLast(CHAT_HANDLER);
 //                    ch.pipeline().addLast(CREATE_GROUP_HANDLER);
 //                    ch.pipeline().addLast(GROUP_CHAT_HANDLER);
 //                    ch.pipeline().addLast(GROUP_QUIT_HANDLER);
